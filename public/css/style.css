@@ -1,0 +1,12 @@
+*{
+    font-family: 'KoHo', sans-serif;
+}
+
+.icon{
+    width: 75px;
+    height: 75px;
+}
+
+footer{
+    display: flex;
+}
