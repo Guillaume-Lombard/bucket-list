@@ -5,8 +5,9 @@
 {% block body %}
     <h3 class="mb-3">Detail of wish</h3>
 
+    {% set ra = random(1, 3) %}
     <div class="d-flex position-relative">
-        <img src="{{ asset('img/wish.png') }}" style="width: 20%" class="card-img-top" alt="image">
+        <img src="{{ asset('img/logoWishes/wish' ~ ra ~'.png') }}" style="width: 20%" class="card-img-top" alt="image">
         <div class="ms-3">
             <h4 class="mt-0">{{ wish.title }}</h4>
             <p>{{ wish.description }}</p>

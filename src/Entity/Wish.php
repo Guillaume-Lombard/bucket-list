@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\WishRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=WishRepository::class)
@@ -18,16 +19,31 @@ class Wish
     private $id;
 
     /**
+     * @Assert\NotBlank(message="Please provide a name of the wish !!")
+     * @Assert\Length(
+     *     max=250, maxMessage="Max 250 caracters please !!",
+     *     min=2,   minMessage="Min 2 caracters please !!"
+     * )
      * @ORM\Column(type="string", length=250)
      */
     private $title;
 
     /**
+     * @Assert\NotBlank(message="Please provide a description of the wish !!")
+     * @Assert\Length(
+     *     max=2000, maxMessage="Max 2000 caracters please !!",
+     *     min=2,   minMessage="Min 2 caracters please !!"
+     * )
      * @ORM\Column(type="text")
      */
     private $description;
 
     /**
+     * @Assert\NotBlank(message="Please provide a author of the wish !!")
+     * @Assert\Length(
+     *     max=50, maxMessage="Max 50 caracters please !!",
+     *     min=2,   minMessage="Min 2 caracters please !!"
+     * )
      * @ORM\Column(type="string", length=50)
      */
     private $author;
@@ -43,6 +59,11 @@ class Wish
     private $dateCreated;
 
     /**
+     * @Assert\Range(
+     *     min="0", max="10",
+     *     notInRangeMessage="Vote must be between 0 and 10"
+     * )
+     *
      * @ORM\Column(type="float", nullable=true)
      */
     private $vote;

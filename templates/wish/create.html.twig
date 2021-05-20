@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} {{ parent() }} | Detail {% endblock %}
+
+{% block body %}
+
+    <h3>Create a wish</h3>
+
+    <!--{# form_theme wishForm 'bootstrap_4_layout.html.twig' %}#}  pour les themes bootstrap -->
+
+    <div>
+        {{ form_start(wishForm) }}
+        {{ form_widget(wishForm) }}
+        <button class="btn btn-secondary mt-3">Add wish</button>
+        {{ form_end(wishForm) }}
+    </div>
+{% endblock %}
+
+
+

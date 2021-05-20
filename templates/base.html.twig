@@ -30,6 +30,18 @@
             </div>
         </header>
 
+        <!-- Gestion de message flash -->
+
+        {% for label, messages in app.flashes %}
+            <div class="alert alert-success">
+                {% for message in messages %}
+                    <div>
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            </div>
+        {% endfor %}
+
         <main>
             {% block body %} {% endblock %}
         </main>
