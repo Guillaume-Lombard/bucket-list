@@ -11,6 +11,9 @@
         <div class="ms-3">
             <h4 class="mt-0">{{ wish.title }}</h4>
             <p>{{ wish.description }}</p>
+            {% if wish.category %}
+                <p>Category: {{ wish.category.name }}</p>
+            {% endif %}
             <p>By {{ wish.author }}, date: {{ wish.dateCreated|date('Y-m-d') }}</p>
         </div>
     </div>

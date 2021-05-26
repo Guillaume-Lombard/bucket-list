@@ -16,6 +16,9 @@
                     <img src="{{ asset('img/logoWishes/wish' ~ r ~'.png') }}" style="width: 20%" class="card-img-top" alt="image">
                     <div class="card-body">
                         <h5 class="card-title">{{ wish.title }}</h5>
+                        {% if wish.category %}
+                            <p class="card-text">Category: {{ wish.category.name }}</p>
+                        {% endif %}
                         <p class="card-text">{{ wish.dateCreated|date('Y-m-d') }}, Note : {{ wish.vote }}</p>
                         <a href="{{ path('wish_detail', {'id' : wish.id}) }}" class="btn btn-secondary stretched-link">Detail</a>
                     </div>

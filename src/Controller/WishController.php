@@ -6,6 +6,7 @@ use App\Entity\Wish;
 use App\Form\WishType;
 use App\Repository\WishRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -20,7 +21,7 @@ class WishController extends AbstractController
     {
         $titlePage = "List of whishes";
 
-        $wishes = $wishRepository -> findBy([], ["dateCreated" => "DESC"]);
+        $wishes = $wishRepository -> findAllWithCat();
 
 
         return $this->render('wish/list.html.twig', [
@@ -68,8 +69,12 @@ class WishController extends AbstractController
      */
     public function create(Request $request, EntityManagerInterface $entityManager): Response
     {
-
         $wish = new Wish();
+
+        if ($this->getUser()){
+            $wish->setAuthor($this->getUser()->getUsername());
+        }
+
         $wishForm = $this->createForm(WishType::class, $wish);
         $wish->setIsPublished(true);
         $wish->setDateCreated(new \DateTime());

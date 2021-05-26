@@ -1,5 +1,11 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h2 class="m-0 text-center">Welcome to the bucket list before death </h2>
+    <h2 class="m-0 text-center">
+        Welcome
+        {% if app.user %}
+            {{ app.user.username }}
+        {% endif %}
+        to the bucket list before death
+    </h2>
 {% endblock %}
