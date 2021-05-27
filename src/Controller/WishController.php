@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Wish;
 use App\Form\WishType;
 use App\Repository\WishRepository;
+use App\Services\Censurator;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -22,7 +23,6 @@ class WishController extends AbstractController
         $titlePage = "List of whishes";
 
         $wishes = $wishRepository -> findAllWithCat();
-
 
         return $this->render('wish/list.html.twig', [
             "wishes" => $wishes,
@@ -67,7 +67,7 @@ class WishController extends AbstractController
     /**
      * @Route("/wish/create/", name="wish_create")
      */
-    public function create(Request $request, EntityManagerInterface $entityManager): Response
+    public function create(Request $request, EntityManagerInterface $entityManager, Censurator $censurator): Response
     {
         $wish = new Wish();
 
@@ -83,7 +83,9 @@ class WishController extends AbstractController
 
         if ($wishForm->isSubmitted() && $wishForm->isValid()){
 
-            //dump($wish);
+            //service Censurator
+            $string = $censurator->purify($wish->getDescription());
+            $wish->setDescription($string);
 
             $entityManager->persist($wish);
             $entityManager->flush();
